@@ -1,4 +1,3 @@
-
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -30,6 +29,19 @@ body {
 
 [dir="rtl"] {
     text-align: right;
+}
+
+/* Logo Styles */
+.logo-image {
+    height: 40px;
+    width: auto;
+}
+
+.hero-logo {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
 }
 
 /* Typography */
@@ -679,6 +691,14 @@ p {
         padding: 0 1rem;
     }
     
+    .logo-image {
+        height: 35px;
+    }
+    
+    .hero-logo {
+        max-width: 250px;
+    }
+    
     .nav-menu {
         position: fixed;
         top: 0;
@@ -754,6 +774,14 @@ p {
 }
 
 @media (max-width: 480px) {
+    .logo-image {
+        height: 30px;
+    }
+    
+    .hero-logo {
+        max-width: 200px;
+    }
+    
     .hero-title {
         font-size: 2rem;
     }
