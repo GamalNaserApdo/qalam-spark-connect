@@ -1,4 +1,3 @@
-
 // DOM Elements
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
@@ -26,7 +25,6 @@ navToggle.addEventListener('click', () => {
     });
 
     // Registration form submission
-    const registrationForm = document.getElementById('registrationForm');
     if (registrationForm) {
         registrationForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -47,30 +45,29 @@ navToggle.addEventListener('click', () => {
         });
     }
 
-    // Initialize chatbot
-    initializeChatbot();
-});
-
 // Chatbot functionality
-let isWebhookConnected = false;
-let webhookUrl = ''; // This will be set later when the webhook URL is provided
+let isWebhookConnected = true; // Set to true by default since we have a webhook URL
+let webhookUrl = 'https://sidrah.app.n8n.cloud/webhook-test/95e9288e-942a-41ce-a0aa-5ab24f7986de';
 
+// Initialize chatbot
+function initializeChatbot() {
+    console.log('Initializing chatbot...');
+    
     // Toggle chatbot window
-    chatbotIcon.addEventListener('click', function() {
-        console.log('Chatbot icon clicked');
-        const isActive = chatbotWindow.classList.contains('active');
-        
-        if (isActive) {
-            chatbotWindow.classList.remove('active');
-            console.log('Chatbot window closed');
-        } else {
-            chatbotWindow.classList.add('active');
-            console.log('Chatbot window opened');
-            if (chatInput) {
-                chatInput.focus();
+    if (chatbotIcon) {
+        chatbotIcon.addEventListener('click', function() {
+            console.log('Chatbot icon clicked');
+            chatbotWindow.classList.toggle('active');
+            if (chatbotWindow.classList.contains('active')) {
+                console.log('Chatbot window opened');
+                if (chatInput) {
+                    chatInput.focus();
+                }
+            } else {
+                console.log('Chatbot window closed');
             }
-        }
-    });
+        });
+    }
 
     // Close chatbot window
     if (chatbotClose) {
@@ -80,20 +77,53 @@ let webhookUrl = ''; // This will be set later when the webhook URL is provided
         });
     }
 
+    // Close chatbot when clicking outside
+    document.addEventListener('click', (e) => {
+        if (chatbotWindow && chatbotWindow.classList.contains('active')) {
+            if (!chatbotIcon.contains(e.target) && !chatbotWindow.contains(e.target)) {
+                chatbotWindow.classList.remove('active');
+            }
+        }
+    });
+
     // Send message functionality
-    function sendMessage() {
-        if (!chatInput || !messagesContainer) return;
+    if (sendButton) {
+        sendButton.addEventListener('click', sendMessage);
+    }
+
+    if (chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
+
+    // Connect to webhook
+    if (webhookUrl) {
+        connectWebhook(webhookUrl);
+    }
+}
+
+// Send message function
+async function sendMessage() {
+    if (!chatInput || !chatMessages) return;
+    
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    console.log('Sending message:', message);
+
+    // Add user message to chat
+    addMessage(message, 'user');
+    chatInput.value = '';
+
+    // Show typing indicator
+    const typingIndicator = addTypingIndicator();
+
+    try {
+        let response;
         
-        const message = chatInput.value.trim();
-        if (!message) return;
-
-        console.log('Sending message:', message);
-
-        // Add user message to chat
-        addMessageToChat(message, 'user');
-        chatInput.value = '';
-
-        // Send to webhook if connected
         if (isWebhookConnected && webhookUrl) {
             // Send to webhook
             response = await sendToWebhook(message);
@@ -205,34 +235,19 @@ function connectWebhook(url) {
     addMessage('تم تفعيل المساعد الذكي بنجاح! الآن يمكنني تقديم إجابات أكثر دقة.', 'bot');
 }
 
-// Event listeners for chat
-sendButton.addEventListener('click', sendMessage);
-
-chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-});
-
-// Registration form handling
-registrationForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize chatbot
+    initializeChatbot();
     
-    const formData = {
-        studentName: document.getElementById('studentName').value,
-        parentName: document.getElementById('parentName').value,
-        phone: document.getElementById('phone').value,
-        grade: document.getElementById('grade').value
-    };
-    
-    // Here you would typically send the data to your server
-    console.log('Registration data:', formData);
-    
-    // Show success message
-    alert('تم إرسال طلب التسجيل بنجاح! سنتواصل معكم في أقرب وقت ممكن.');
-    
-    // Reset form
-    registrationForm.reset();
+    // Initialize animations
+    const animateElements = document.querySelectorAll('.feature-card, .program-card, .facility-item');
+    animateElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
 });
 
 // Navbar scroll effect
@@ -261,18 +276,6 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, observerOptions);
-
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.feature-card, .program-card, .facility-item');
-    
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-});
 
 // Utility function to format phone numbers
 function formatPhoneNumber(phone) {
