@@ -1,24 +1,287 @@
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>qalam-spark-connect</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدارس القلم - Al Qalam Schools</title>
+    <meta name="description" content="مدارس القلم - تعليم متميز ومستقبل مشرق">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./src/styles/main.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>مدارس القلم</h2>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link">الرئيسية</a>
+                <a href="#about" class="nav-link">عن المدرسة</a>
+                <a href="#programs" class="nav-link">البرامج</a>
+                <a href="#facilities" class="nav-link">المرافق</a>
+                <a href="#contact" class="nav-link">تواصل معنا</a>
+                <a href="#register" class="nav-cta">التسجيل</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-    <meta property="og:title" content="qalam-spark-connect" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">مدارس القلم</h1>
+            <p class="hero-subtitle">تعليم متميز يبني شخصية طلابنا ويؤهلهم لمستقبل مشرق</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('register')">سجل الآن</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('about')">اعرف المزيد</button>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>اكتشف المزيد</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>لماذا مدارس القلم؟</h2>
+                <p>نحن نؤمن بأن التعليم الجيد هو أساس بناء المستقبل</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>تعليم متميز</h3>
+                    <p>منهج تعليمي حديث يجمع بين الأصالة والمعاصرة</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>كادر مؤهل</h3>
+                    <p>معلمون متخصصون وذوو خبرة عالية في مجالاتهم</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏫</div>
+                    <h3>بيئة محفزة</h3>
+                    <p>مرافق حديثة وبيئة تعليمية آمنة ومحفزة للإبداع</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>أنشطة متنوعة</h3>
+                    <p>برامج وأنشطة لاصفية تنمي مواهب الطلاب</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <!-- Academic Programs -->
+    <section id="programs" class="programs">
+        <div class="container">
+            <div class="section-header">
+                <h2>المسارات الأكاديمية</h2>
+                <p>برامج تعليمية متنوعة تلبي احتياجات جميع الطلاب</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-image">
+                        <div class="program-overlay">
+                            <h3>المرحلة الابتدائية</h3>
+                            <p>بناء الأسس التعليمية القوية</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-image">
+                        <div class="program-overlay">
+                            <h3>المرحلة المتوسطة</h3>
+                            <p>تطوير المهارات والقدرات</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-image">
+                        <div class="program-overlay">
+                            <h3>المرحلة الثانوية</h3>
+                            <p>إعداد للجامعة والمستقبل</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities -->
+    <section id="facilities" class="facilities">
+        <div class="container">
+            <div class="section-header">
+                <h2>مرافقنا المتميزة</h2>
+                <p>بيئة تعليمية حديثة مجهزة بأحدث التقنيات</p>
+            </div>
+            <div class="facilities-grid">
+                <div class="facility-item">
+                    <div class="facility-icon">🔬</div>
+                    <h4>مختبرات علمية</h4>
+                    <p>مختبرات مجهزة بأحدث الأجهزة</p>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">💻</div>
+                    <h4>مختبر حاسوب</h4>
+                    <p>تقنيات حديثة لتعلم البرمجة</p>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">📚</div>
+                    <h4>مكتبة شاملة</h4>
+                    <p>مصادر تعليمية متنوعة</p>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">⚽</div>
+                    <h4>ملاعب رياضية</h4>
+                    <p>مساحات للأنشطة الرياضية</p>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">🎨</div>
+                    <h4>استوديو فنون</h4>
+                    <p>مساحة لتنمية المواهب الفنية</p>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">🎭</div>
+                    <h4>قاعة متعددة الأغراض</h4>
+                    <p>للفعاليات والعروض</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Registration -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>تواصل معنا</h2>
+                    <p>نحن هنا للإجابة على جميع استفساراتكم</p>
+                    
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <h4>العنوان</h4>
+                            <p>الرياض، المملكة العربية السعودية</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <h4>الهاتف</h4>
+                            <p dir="ltr">+966 11 123 4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p dir="ltr">info@alqalamschools.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="registration-form" id="register">
+                    <h3>نموذج التسجيل</h3>
+                    <form id="registrationForm">
+                        <div class="form-group">
+                            <input type="text" id="studentName" placeholder="اسم الطالب" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="parentName" placeholder="اسم ولي الأمر" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" placeholder="رقم الجوال" required>
+                        </div>
+                        <div class="form-group">
+                            <select id="grade" required>
+                                <option value="">اختر المرحلة</option>
+                                <option value="elementary">الابتدائية</option>
+                                <option value="middle">المتوسطة</option>
+                                <option value="high">الثانوية</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">إرسال طلب التسجيل</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>مدارس القلم</h3>
+                    <p>تعليم متميز يبني المستقبل</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <a href="#home">الرئيسية</a>
+                    <a href="#about">عن المدرسة</a>
+                    <a href="#programs">البرامج</a>
+                    <a href="#contact">التواصل</a>
+                </div>
+                <div class="footer-section">
+                    <h4>تابعنا</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 مدارس القلم. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-icon" id="chatbotIcon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12C2 13.54 2.36 15.01 3.01 16.32L2 22L7.68 20.99C8.99 21.64 10.46 22 12 22C17.52 22 22 17.52 22 12S17.52 2 12 2ZM12 20C10.69 20 9.45 19.69 8.35 19.15L8 19L4.55 19.9L5.45 16.55L5.25 16.2C4.69 15.1 4.4 13.87 4.4 12.6C4.4 7.85 8.25 4 13 4S21.6 7.85 21.6 12.6S17.75 20 12 20Z" fill="currentColor"/>
+                <circle cx="8.5" cy="12" r="1.5" fill="currentColor"/>
+                <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                <circle cx="15.5" cy="12" r="1.5" fill="currentColor"/>
+            </svg>
+        </div>
+        
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h4>مساعد مدارس القلم</h4>
+                <button class="chatbot-close" id="chatbotClose">×</button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    <p>مرحباً بك! كيف يمكنني مساعدتك اليوم؟</p>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="اكتب رسالتك هنا...">
+                <button id="sendMessage">إرسال</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./src/scripts/main.js"></script>
+</body>
 </html>
