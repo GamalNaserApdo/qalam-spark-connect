@@ -37,8 +37,8 @@ function scrollToSection(sectionId) {
 }
 
 // Chatbot functionality
-let isWebhookConnected = false;
-let webhookUrl = ''; // This will be set later when the webhook URL is provided
+let isWebhookConnected = true;
+let webhookUrl = 'https://sidrah.app.n8n.cloud/webhook-test/95e9288e-942a-41ce-a0aa-5ab24f7986de';
 
 // Toggle chatbot window
 chatbotIcon.addEventListener('click', () => {
