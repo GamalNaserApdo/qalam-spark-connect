@@ -47,7 +47,7 @@ navToggle.addEventListener('click', () => {
 
 // Chatbot functionality
 let isWebhookConnected = true; // Set to true by default since we have a webhook URL
-let webhookUrl = 'https://sidrah.app.n8n.cloud/webhook/alqalam-chatbot';    
+let webhookUrl = 'https://sidrah.app.n8n.cloud/webhook/alqalam-query';    
 
 // Initialize chatbot
 function initializeChatbot() {
