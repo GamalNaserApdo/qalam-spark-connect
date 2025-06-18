@@ -138,9 +138,9 @@ async function sendMessage() {
         // Add bot response
         addMessage(response, 'bot');
     } catch (error) {
-        console.error('Error sending message:', error);
+        console.error('Error in sendMessage:', error);
         removeTypingIndicator(typingIndicator);
-        addMessage('عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.', 'bot');
+        addMessage('عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى. (خطأ: ' + error.message + ')', 'bot');
     }
 }
 
@@ -178,24 +178,41 @@ function removeTypingIndicator(indicator) {
 
 // Send message to webhook
 async function sendToWebhook(message) {
-    const response = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            question: message,
-            timestamp: new Date().toISOString(),
-            source: 'qalam-schools-website'
-        })
-    });
+    try {
+        console.log('Sending message to webhook:', message);
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                question: message,
+                timestamp: new Date().toISOString(),
+                source: 'qalam-schools-website'
+            })
+        });
 
-    if (!response.ok) {
-        throw new Error('Webhook request failed');
+        console.log('Webhook response status:', response.status);
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Webhook error response:', errorText);
+            throw new Error(`Webhook request failed with status ${response.status}: ${errorText}`);
+        }
+
+        const data = await response.json();
+        console.log('Webhook response data:', data);
+        
+        if (!data || (!data.reply && !data.message)) {
+            console.error('Invalid response format:', data);
+            throw new Error('Invalid response format from webhook');
+        }
+
+        return data.reply || data.message || 'شكراً لرسالتك. سنتواصل معك قريباً.';
+    } catch (error) {
+        console.error('Detailed error in sendToWebhook:', error);
+        throw error;
     }
-
-    const data = await response.json();
-    return data.reply || data.message || 'شكراً لرسالتك. سنتواصل معك قريباً.';
 }
 
 // Default responses when webhook is not connected
