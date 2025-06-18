@@ -47,7 +47,7 @@ navToggle.addEventListener('click', () => {
 
 // Chatbot functionality
 let isWebhookConnected = true; // Set to true by default since we have a webhook URL
-let webhookUrl = 'https://sidrah.app.n8n.cloud/webhook-test/95e9288e-942a-41ce-a0aa-5ab24f7986de';
+let webhookUrl = 'https://sidrah.app.n8n.cloud/webhook/alqalam-chatbot';    
 
 // Initialize chatbot
 function initializeChatbot() {
@@ -184,7 +184,7 @@ async function sendToWebhook(message) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            message: message,
+            question: message,
             timestamp: new Date().toISOString(),
             source: 'qalam-schools-website'
         })
