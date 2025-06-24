@@ -58,79 +58,52 @@
         
         /* Enhanced Chat Input Area */
         .n8n-chat .chat-input {
-            border-top: 2px solid #e9ecef !important;
-            padding: 1.5rem !important;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
-            border-radius: 0 0 20px 20px !important;
-            position: relative;
+            display: flex !important;
+            align-items: center !important;
+            padding: 10px !important;
+            border-top: 1px solid #ccc !important;
+            background: #f8f9fa !important;
         }
         
-        .n8n-chat .chat-textarea {
-            border: 2px solid #dee2e6 !important;
-            border-radius: 25px !important;
-            padding: 15px 20px !important;
-            font-family: 'Tajawal', 'Cairo', sans-serif !important;
+        .n8n-chat .chat-textarea, .n8n-chat .chat-input input[type="text"] {
+            flex: 1 1 0%;
+            padding: 8px 12px !important;
             font-size: 14px !important;
-            resize: none !important;
-            transition: all 0.3s ease !important;
-            background: white !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+            border: 1px solid #ddd !important;
+            border-radius: 6px !important;
+            font-family: 'Tajawal', 'Cairo', Arial, sans-serif !important;
+            margin-left: 8px !important;
+            background: #fff !important;
+            direction: rtl !important;
         }
         
-        .n8n-chat .chat-textarea:focus {
-            outline: none !important;
-            border-color: #004AAD !important;
-            box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.1), 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-        }
-        
-        .n8n-chat .chat-send-button {
-            background: linear-gradient(135deg, #004AAD 0%, #003a8a 100%) !important;
+        .n8n-chat .chat-send-button, .n8n-chat .chat-input button {
+            padding: 8px 16px !important;
+            background-color: #005cbf !important;
+            color: #fff !important;
             border: none !important;
-            border-radius: 50% !important;
-            width: 45px !important;
-            height: 45px !important;
-            transition: all 0.3s ease !important;
-            box-shadow: 0 4px 15px rgba(0, 74, 173, 0.3) !important;
+            border-radius: 6px !important;
+            cursor: pointer !important;
+            font-size: 14px !important;
+            margin-right: 0 !important;
+            transition: background 0.2s;
         }
         
-        .n8n-chat .chat-send-button:hover {
-            transform: scale(1.1) !important;
-            box-shadow: 0 6px 20px rgba(0, 74, 173, 0.4) !important;
+        .n8n-chat .chat-send-button:hover, .n8n-chat .chat-input button:hover {
+            background-color: #004AAD !important;
         }
         
         /* Enhanced Footer */
         .n8n-chat .chat-footer {
-            display: flex !important;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            font-size: 13px;
-            color: #6c757d;
-            background: #f8f9fa !important;
-            border-top: 1.5px solid #e5e7eb !important;
-            border-radius: 0 0 20px 20px !important;
-            padding: 10px 18px 10px 18px !important;
-            min-height: 40px;
-            box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
-        }
-        
-        .n8n-chat .chat-footer .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-        }
-        
-        .n8n-chat .chat-footer .footer-left svg {
-            width: 18px;
-            height: 18px;
-            color: #004AAD;
-        }
-        
-        .n8n-chat .chat-footer .footer-right {
-            font-size: 12px;
-            color: #888;
-            font-weight: 400;
+            text-align: center !important;
+            font-size: 12px !important;
+            color: #888 !important;
+            margin-top: 12px !important;
+            padding: 8px 10px !important;
+            font-family: 'Tajawal', 'Cairo', Arial, sans-serif !important;
+            background: none !important;
+            border: none !important;
+            direction: rtl !important;
         }
         
         /* Enhanced Chat Window */
@@ -203,6 +176,35 @@
             
             .n8n-chat .chat-footer .footer-right {
                 font-size: 11px;
+            }
+        }
+        
+        /* Logo in Chat Header */
+        .n8n-chat .chat-header img.logo-image {
+            max-height: 60px !important;
+            display: block !important;
+            margin: 0 auto !important;
+        }
+        
+        /* Responsive for Mobile */
+        @media (max-width: 600px) {
+            .n8n-chat .chat-footer {
+                font-size: 11px !important;
+                padding: 8px 4px !important;
+            }
+            .n8n-chat .chat-header img.logo-image {
+                max-height: 40px !important;
+            }
+            .n8n-chat .chat-input {
+                padding: 6px !important;
+            }
+            .n8n-chat .chat-textarea, .n8n-chat .chat-input input[type="text"] {
+                font-size: 13px !important;
+                padding: 6px 8px !important;
+            }
+            .n8n-chat .chat-send-button, .n8n-chat .chat-input button {
+                padding: 6px 10px !important;
+                font-size: 13px !important;
             }
         }
     </style>
@@ -474,65 +476,25 @@
                     subtitle: '',
                     inputPlaceholder: 'اكتب سؤالك هنا...',
                     getStarted: 'محادثة جديدة',
-                    footer: `
-                        <span class="footer-left">
-                            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.75 2.75a.75.75 0 0 0-1.5 0v7.19l-3.72 3.72a.75.75 0 1 0 1.06 1.06l3.19-3.19 3.19 3.19a.75.75 0 1 0 1.06-1.06l-3.72-3.72V2.75z"/></svg>
-                            Powered by <strong>sidrah.ai</strong>
-                        </span>
-                        <span class="footer-right">جميع الحقوق محفوظة لمدارس القلم © 2025</span>
-                    `,
+                    footer: "Powered by <strong>sidrah.ai</strong> | جميع الحقوق محفوظة لمدارس القلم © 2025",
                 },
                 en: {
                     title: 'Hi there! 👋',
                     subtitle: "Start a chat. We're here to help you 24/7.",
-                    inputPlaceholder: 'Type your question...',
+                    inputPlaceholder: 'Type your question here...',
                     getStarted: 'New Conversation',
-                    footer: `
-                        <span class="footer-left">
-                            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.75 2.75a.75.75 0 0 0-1.5 0v7.19l-3.72 3.72a.75.75 0 1 0 1.06 1.06l3.19-3.19 3.19 3.19a.75.75 0 1 0 1.06-1.06l-3.72-3.72V2.75z"/></svg>
-                            Powered by <strong>sidrah.ai</strong>
-                        </span>
-                        <span class="footer-right">جميع الحقوق محفوظة لمدارس القلم © 2025</span>
-                    `,
+                    footer: "Powered by <strong>sidrah.ai</strong> | جميع الحقوق محفوظة لمدارس القلم © 2025",
                 },
             },
         });
-
-        // Show a 'Restored previous conversation' message if chat history exists
-        function showRestoredMessage() {
-            const chatWindow = document.querySelector('.n8n-chat .chat-window');
-            const chatMessages = document.querySelector('.n8n-chat .chat-messages');
-            if (!chatWindow || !chatMessages) return;
-            // Only show if there is more than 1 message (i.e., not a new session)
-            if (chatMessages.children.length > 1 && !chatWindow.querySelector('.restored-msg')) {
-                const restored = document.createElement('div');
-                restored.className = 'restored-msg';
-                restored.innerHTML = 'تم استعادة المحادثة السابقة';
-                restored.style.background = '#e9ecef';
-                restored.style.color = '#004AAD';
-                restored.style.textAlign = 'center';
-                restored.style.fontSize = '13px';
-                restored.style.fontWeight = '500';
-                restored.style.borderRadius = '12px';
-                restored.style.margin = '10px auto 8px auto';
-                restored.style.padding = '6px 14px';
-                restored.style.width = 'fit-content';
-                restored.style.boxShadow = '0 1px 4px rgba(0,0,0,0.04)';
-                chatMessages.insertBefore(restored, chatMessages.firstChild);
+        // Hide the 'Powered by n8n' line if it appears
+        const hideN8nBranding = setInterval(() => {
+            const n8nBrand = document.querySelector('.n8n-chat [href*="n8n.io"]');
+            if (n8nBrand) {
+                n8nBrand.style.display = 'none';
+                clearInterval(hideN8nBranding);
             }
-        }
-        // Wait for chat to load and then check
-        const observer = new MutationObserver(() => {
-            showRestoredMessage();
-        });
-        const waitForChat = setInterval(() => {
-            const chatMessages = document.querySelector('.n8n-chat .chat-messages');
-            if (chatMessages) {
-                observer.observe(chatMessages, { childList: true });
-                showRestoredMessage();
-                clearInterval(waitForChat);
-            }
-        }, 400);
+        }, 500);
     </script>
 </body>
 </html>
