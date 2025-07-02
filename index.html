@@ -492,7 +492,7 @@
 const sessionId = localStorage.getItem('sessionId') || crypto.randomUUID();
 localStorage.setItem('sessionId', sessionId);
 
-fetch("https://n8n.srv877631.hstgr.cloud//webhook//e60b3249-01a7-4be7-a324-3d0ff22193cd", {
+    fetch("https://n8n.srv877631.hstgr.cloud/webhook/e60b3249-01a7-4be7-a324-3d0ff22193cd", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
