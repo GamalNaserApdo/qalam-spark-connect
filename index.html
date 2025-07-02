@@ -459,34 +459,49 @@
         import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
         
         createChat({
-            webhookUrl: 'https://n8n.srv877631.hstgr.cloud/webhook/cca3e7b6-457a-4bc1-9d02-bbb6f741d846/chat',
-            target: '#n8n-chat',
-            mode: 'window',
-            chatInputKey: 'chatInput',
-            chatSessionKey: 'sessionId',
-            loadPreviousSession: true,
-            showWelcomeScreen: false,
-            defaultLanguage: 'ar',
-            initialMessages: [
-                "مرحباً بكم في مدارس القلم، خطوتكم الأولى نحو بيئة تعليمية ملهمة وفرص لا محدودة لأطفالكم!"
-            ],
-            i18n: {
-                ar: {
-                    title: 'مدارس القلم.. مساعدك الذكي 👋',
-                    subtitle: '',
-                    inputPlaceholder: 'اكتب سؤالك هنا...',
-                    getStarted: 'محادثة جديدة',
-                    footer: "Powered by <strong>sidrah.ai</strong> | جميع الحقوق محفوظة لمدارس القلم © 2025",
-                },
-                en: {
-                    title: 'Hi there! 👋',
-                    subtitle: "Start a chat. We're here to help you 24/7.",
-                    inputPlaceholder: 'Type your question here...',
-                    getStarted: 'New Conversation',
-                    footer: "Powered by <strong>sidrah.ai</strong> | جميع الحقوق محفوظة لمدارس القلم © 2025",
-                },
-            },
-        });
+    webhookUrl: 'https://n8n.srv877631.hstgr.cloud/webhook/dd4c6348-be38-4a2b-8fe9-85c6ac707729/chat',
+    target: '#n8n-chat',
+    mode: 'window',
+    chatInputKey: 'chatInput',
+    chatSessionKey: 'sessionId',
+    loadPreviousSession: true,
+    showWelcomeScreen: false,
+    defaultLanguage: 'ar',
+    initialMessages: [
+        "مرحباً بكم في مدارس القلم، خطوتكم الأولى نحو بيئة تعليمية ملهمة وفرص لا محدودة لأطفالكم!"
+    ],
+    i18n: {
+        ar: {
+            title: 'مدارس القلم.. مساعدك الذكي 👋',
+            subtitle: '',
+            inputPlaceholder: 'اكتب سؤالك هنا...',
+            getStarted: 'محادثة جديدة',
+            footer: "Powered by <strong>sidrah.ai</strong> | جميع الحقوق محفوظة لمدارس القلم © 2025",
+        },
+        en: {
+            title: 'Hi there! 👋',
+            subtitle: "Start a chat. We're here to help you 24/7.",
+            inputPlaceholder: 'Type your question here...',
+            getStarted: 'New Conversation',
+            footer: "Powered by <strong>sidrah.ai</strong> | جميع الحقوق محفوظة لمدارس القلم © 2025",
+        },
+    },
+});
+
+// ✅ هنا نضع الكود الذي يرسل رسالة __load__ تلقائية
+const sessionId = localStorage.getItem('sessionId') || crypto.randomUUID();
+localStorage.setItem('sessionId', sessionId);
+
+fetch("https://n8n.srv877631.hstgr.cloud//webhook//e60b3249-01a7-4be7-a324-3d0ff22193cd", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    sessionId: sessionId,
+    chatInput: "__load__",
+    loadHistory: true
+  })
+});
+
         // Hide the 'Powered by n8n' line if it appears
         const hideN8nBranding = setInterval(() => {
             const n8nBrand = document.querySelector('.n8n-chat [href*="n8n.io"]');
