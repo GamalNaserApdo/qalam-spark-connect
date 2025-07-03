@@ -457,62 +457,48 @@
     <!-- n8n Chat Script -->
     
 
-    <script type="module">
-        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-    
-        createChat({
-            webhookUrl: 'https://n8n.srv877631.hstgr.cloud/webhook/e60b3249-01a7-4be7-a324-3d0ff22193cd',
-            target: '#n8n-chat',
-            mode: 'window',
-            chatInputKey: 'chatInput',
-            chatSessionKey: 'sessionId',
-            loadPreviousSession: true,
-            showWelcomeScreen: false,
-            defaultLanguage: 'ar',
-            initialMessages: [
-                "مرحباً بكم في مدارس القلم، خطوتكم الأولى نحو بيئة تعليمية ملهمة وفرص لا محدودة لأطفالكم!"
-            ],
-            i18n: {
-                ar: {
-                    title: 'مدارس القلم.. مساعدك الذكي 👋',
-                    subtitle: '',
-                    inputPlaceholder: 'اكتب سؤالك هنا...',
-                    getStarted: 'محادثة جديدة',
-                    footer: "Powered by <strong>sidrah.ai</strong> | جميع الحقوق محفوظة لمدارس القلم © 2025",
-                },
-                en: {
-                    title: 'Hi there! 👋',
-                    subtitle: "Start a chat. We're here to help you 24/7.",
-                    inputPlaceholder: 'Type your question here...',
-                    getStarted: 'New Conversation',
-                    footer: "Powered by <strong>sidrah.ai</strong> | جميع الحقوق محفوظة لمدارس القلم © 2025",
-                },
-            },
+    <script>
+        // توليد sessionId ثابت للمستخدم الواحد
+        const sessionId = localStorage.getItem("sessionId") || crypto.randomUUID();
+        localStorage.setItem("sessionId", sessionId);
+      
+        // أول ما تفتح الصفحة، حمّل المحادثة السابقة
+        fetch("http://31.97.156.234:5678/webhook/ddcbd671-40ca-4dc3-b2e8-331f76ddae7f", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sessionId: sessionId,
+            chatInput: "__load__",
+            loadHistory: true
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log("🔁 History loaded:", data);
+          // هنا ممكن تعرض الردود السابقة في الواجهة
         });
-    
-        // ✅ إرسال رسالة __load__ تلقائيًا
-        const sessionId = localStorage.getItem('sessionId') || crypto.randomUUID();
-        localStorage.setItem('sessionId', sessionId);
-    
-        fetch("https://n8n.srv877631.hstgr.cloud/webhook/e60b3249-01a7-4be7-a324-3d0ff22193cd", {
+      
+        // دالة لإرسال رسالة جديدة من المستخدم
+        function sendMessage(userInput) {
+          fetch("http://31.97.156.234:5678/webhook/ddcbd671-40ca-4dc3-b2e8-331f76ddae7f", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                sessionId: sessionId,
-                chatInput: "__load__",
-                loadHistory: true
+              sessionId: sessionId,
+              chatInput: userInput
             })
-        });
-    
-        // إخفاء عبارة "Powered by n8n"
-        const hideN8nBranding = setInterval(() => {
-            const n8nBrand = document.querySelector('.n8n-chat [href*="n8n.io"]');
-            if (n8nBrand) {
-                n8nBrand.style.display = 'none';
-                clearInterval(hideN8nBranding);
-            }
-        }, 500);
-    </script>
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log("🤖 Agent reply:", data);
+            // هنا ممكن تعرض الرد الجديد
+          });
+        }
+      
+        // مثال عند الضغط على زر إرسال:
+        // sendMessage("ما هي المصاريف؟");
+      </script>
+      
     
 
 
