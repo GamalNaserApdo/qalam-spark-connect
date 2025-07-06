@@ -463,7 +463,7 @@
         localStorage.setItem("sessionId", sessionId);
       
         // أول ما تفتح الصفحة، حمّل المحادثة السابقة
-        fetch("http://31.97.156.234:5678/webhook/ddcbd671-40ca-4dc3-b2e8-331f76ddae7f", {
+        fetch("https://n8n.srv877631.hstgr.cloud/webhook/b80cf37d-a227-4099-b2a3-c2f5af021f17", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -480,7 +480,7 @@
       
         // دالة لإرسال رسالة جديدة من المستخدم
         function sendMessage(userInput) {
-          fetch("http://31.97.156.234:5678/webhook/ddcbd671-40ca-4dc3-b2e8-331f76ddae7f", {
+          fetch("https://n8n.srv877631.hstgr.cloud/webhook/b80cf37d-a227-4099-b2a3-c2f5af021f17", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
